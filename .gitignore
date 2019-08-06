@@ -1,7 +1,13 @@
 ### IntelliJ IDEA ###
-.idea
+/.idea
 *.iws
 *.iml
 *.ipr
 *.xml
 *.html
+*/target
+*.class
+target/
+.project
+.settings/
+.classpath

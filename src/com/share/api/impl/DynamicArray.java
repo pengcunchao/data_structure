@@ -2,17 +2,17 @@ package com.share.api.impl;
 
 import com.share.api.Array;
 
-public class StaticArray<T> implements Array<T> {
+public class DynamicArray<T> implements Array<T> {
     private static final int DEFAULT_SIZE = 16;
     private T[] data;
     private int size;
 
-    public StaticArray(int capacity) {
+    public DynamicArray(int capacity) {
         this.data = (T[]) new Object[capacity];
         this.size = 0;
     }
 
-    public StaticArray() {
+    public DynamicArray() {
         this(DEFAULT_SIZE);
     }
 
@@ -28,11 +28,12 @@ public class StaticArray<T> implements Array<T> {
 
     @Override
     public void add(int index, T e) {
-        if (size == getCapacity()) {
-            throw new IllegalOperationException("Cannot add new element to full array!");
-        }
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index is out of bound!");
+        }
+
+        if (size == getCapacity()) {
+            resize(this.data.length * 2);
         }
 
         for (int i = size; i > index; i--) {
@@ -41,6 +42,14 @@ public class StaticArray<T> implements Array<T> {
 
         data[index] = e;
         size++;
+    }
+
+    private void resize(int capacity) {
+        T[] newData = (T[]) new Object[capacity];
+        for (int i = 0; i < this.size; i++) {
+            newData[i] = this.data[i];
+        }
+        data = newData;
     }
 
     @Override
@@ -75,8 +84,11 @@ public class StaticArray<T> implements Array<T> {
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
-
         size--;
+
+        if (this.size == data.length / 4 && data.length / 2 != 0) {
+            resize(data.length / 2);
+        }
         return result;
     }
 
@@ -109,5 +121,15 @@ public class StaticArray<T> implements Array<T> {
     @Override
     public boolean isEmpty() {
         return this.size == 0;
+    }
+
+    @Override
+    public boolean contains(T ele) {
+        for (int i = 0; i < this.size; i++) {
+            if (ele.equals(this.data[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 }

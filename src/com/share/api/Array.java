@@ -11,4 +11,5 @@ public interface Array<T> {
     int findElement(T ele);
     void set(int index, T ele);
     boolean isEmpty();
+    boolean contains(T ele);
 }
