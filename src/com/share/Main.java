@@ -1,47 +1,27 @@
 package com.share;
 
-import com.share.api.Array;
-import com.share.api.impl.DynamicArray;
-import com.share.api.impl.Node;
+import com.share.api.impl.SimpleBSTree;
 
 public class Main {
 
     public static void main(String[] args) {
-        Array<Integer> array = new DynamicArray<>();
-        for (int i =0;i<10;i++){
-            array.add(i,i);
-        }
-        System.out.println(array.get(6));
-        System.out.println("-----------------------------");
+        SimpleBSTree<Integer> bsTree = new SimpleBSTree<>();
+        bsTree.add(5);
+        bsTree.add(3);
+        bsTree.add(8);
+        bsTree.add(2);
+        bsTree.add(9);
 
-        Node<Integer> ret = removeElement(buildLinkedList(),2);
-        while(ret != null){
-            System.out.println(ret.getData());
-            ret = ret.getNext();
-        }
-    }
+        bsTree.traverse();
+        System.out.println("--------------------");
 
-    public static <T> Node<T> removeElement(Node<T> head, T val) {
-        Node<T> dummyHead = new Node<>(null, head);
-        Node<T> prev = dummyHead;
-        while (prev.getNext() != null) {
-            if (val.equals(prev.getNext().getData())) {
-                prev.setNext(prev.getNext().getNext());
-            } else {
-                prev = prev.getNext();
-            }
-        }
-        return dummyHead.getNext();
-    }
+        bsTree.remove(8);
 
-    private static Node<Integer> buildLinkedList() {
-        Node<Integer> head = new Node<>(1);
+        bsTree.traverse();
+        System.out.println("--------------------");
 
-        Node<Integer> cur = head;
-        for (int i = 0; i < 10; i++) {
-            cur.setNext(new Node<>(i % 4));
-            cur = cur.getNext();
-        }
-        return head;
+
+        bsTree.remove(3);
+        bsTree.traverse();
     }
 }

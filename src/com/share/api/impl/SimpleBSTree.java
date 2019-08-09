@@ -28,15 +28,6 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
         return this.size == 0;
     }
 
-    @Override
-    public void add(T val) {
-        root = add(root,val);
-    }
-
-    @Override
-    public boolean contains(T val) {
-        return contains(root, val);
-    }
 
     @Override
     public void traverse() {
@@ -63,7 +54,7 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
                 return node.getLeft();
             }
             else{
-                return new BinaryTreeNode<>(null,removeMax(node.getLeft()),node.getRight());
+                return new BinaryTreeNode<>(max(node.getLeft()), removeMax(node.getLeft()), node.getRight());
             }
 
         }
@@ -77,8 +68,30 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
         return node;
     }
 
+    private T max(BinaryTreeNode<T> node) {
+        if (node == null) {
+            return null;
+        }
+
+        BinaryTreeNode<T> cur = node;
+        while (cur.getRight() != null) {
+            cur = cur.getRight();
+        }
+
+        return cur.getValue();
+
+    }
+
     private BinaryTreeNode<T> removeMax(BinaryTreeNode<T> node) {
-        return  null;
+        if (node == null) {
+            return null;
+        }
+        if (node.getRight() == null) {
+            size--;
+            return node.getLeft();
+        }
+        node.setRight(removeMax(node.getRight()));
+        return node;
     }
 
 
@@ -87,12 +100,12 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
         if(node == null){
             return;
         }
-        node.handle();
         traverse(node.getLeft());
+        node.handle();
         traverse(node.getRight());
     }
 
-    public void LayerTraverse(){
+    public void levelTraverse(){
         Queue<BinaryTreeNode<T>> queue = new LoopQueue<>();
         queue.enQueue(root);
         BinaryTreeNode<T> cur = null;
@@ -104,6 +117,11 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
             if(cur.getRight() != null)
                 queue.enQueue(cur.getRight());
         }
+    }
+
+    @Override
+    public boolean contains(T val) {
+        return contains(root, val);
     }
 
     private boolean contains(BinaryTreeNode<T> node, T val){
@@ -120,6 +138,11 @@ public class SimpleBSTree<T extends Comparable<T>> implements BSTree<T> {
         else{
             return contains(node.getRight(),val);
         }
+    }
+
+    @Override
+    public void add(T val) {
+        root = add(root,val);
     }
 
     private BinaryTreeNode<T> add(BinaryTreeNode<T> node, T val){
