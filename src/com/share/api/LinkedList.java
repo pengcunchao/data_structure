@@ -8,4 +8,5 @@ public interface LinkedList<T> {
     void set(int index, T ele);
     boolean contains(T ele);
     T remove(int index);
+    boolean removeElement(T ele);
 }

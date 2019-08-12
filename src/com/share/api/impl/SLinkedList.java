@@ -92,4 +92,22 @@ public class SLinkedList<T> implements LinkedList<T> {
         size--;
         return ret.getData();
     }
+
+    @Override
+    public boolean removeElement(T ele) {
+        Node<T> cur = dummyHead;
+        while(cur.getNext() != null){
+            if(ele.equals(cur.getNext().getData())){
+                break;
+            }
+            cur = cur.getNext();
+        }
+
+        if(cur.getNext() != null){
+            cur.setNext(cur.getNext().getNext());
+            size --;
+            return true;
+        }
+        return false;
+    }
 }

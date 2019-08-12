@@ -2,6 +2,16 @@ package com.share;
 
 import com.share.api.impl.SimpleBSTree;
 
+/**
+ * 数组
+ * 链表
+ * 树
+ * 栈
+ * 队列
+ * 堆
+ * 集合
+ * 映射
+ * **/
 public class Main {
 
     public static void main(String[] args) {
