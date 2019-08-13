@@ -1,7 +1,6 @@
 package com.share;
 
-import com.share.api.Heap;
-import com.share.api.impl.MinHeap;
+import com.share.api.impl.TreeSegmentTree;
 
 /**
  * 数组
@@ -17,12 +16,12 @@ import com.share.api.impl.MinHeap;
 public class Main {
 
     public static void main(String[] args) {
-
-        Heap<Integer> heap = MinHeap.heapify(new Integer[]{1, 9, 8, 2, 6, 4, 3, 5});
-
-        for (int i = 0; i < 8; i++) {
-            System.out.println(heap.pop());
-        }
+        TreeSegmentTree<Integer> segmentTree = new TreeSegmentTree<>(new Integer[]{1, 5, 1, -9}, (a, b) -> a + b);
+        System.out.println(segmentTree.query(0,3));
+        System.out.println(segmentTree.query(1,3));
+        segmentTree.update(0,10);
+        System.out.println(segmentTree.query(0,3));
+        System.out.println(segmentTree.query(0,2));
 
     }
 }
