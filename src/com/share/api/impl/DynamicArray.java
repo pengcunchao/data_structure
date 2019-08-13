@@ -132,4 +132,11 @@ public class DynamicArray<T> implements Array<T> {
         }
         return false;
     }
+
+    @Override
+    public void swap(int a, int b) {
+        T temp = data[a];
+        data[a] = data[b];
+        data[b] = temp;
+    }
 }

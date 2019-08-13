@@ -12,4 +12,5 @@ public interface Array<T> {
     void set(int index, T ele);
     boolean isEmpty();
     boolean contains(T ele);
+    void swap(int a, int b);
 }
