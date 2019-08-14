@@ -1,7 +1,8 @@
 package com.share;
 
-import com.share.api.impl.TreeSegmentTree;
-import com.share.api.impl.Trie;
+import com.share.api.impl.RankUnionFind;
+
+import java.util.Random;
 
 /**
  * 数组
@@ -19,14 +20,23 @@ import com.share.api.impl.Trie;
 public class Main {
 
     public static void main(String[] args) {
-        Trie trie = new Trie();
-        trie.add("apple");
-        trie.add("pig");
+        long start = System.currentTimeMillis();
+        int n = 100000000;
+        RankUnionFind rankUnionFind = new RankUnionFind(n);
+        Random random = new Random();
+        for (int i = 0; i < n -1; i++) {
+            rankUnionFind.union(i, i+1);
+        }
+        System.out.println(rankUnionFind.isConnected(0, 1));
+        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
+        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
+        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
+        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
+        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
 
-        System.out.println(trie.contains("apple"));
-        System.out.println(trie.match("a..le"));
-        System.out.println(trie.contains("peach"));
-        System.out.println(trie.match("b.."));
+        long end = System.currentTimeMillis();
+        System.out.println((end - start) / 1000);
+
 
     }
 }
