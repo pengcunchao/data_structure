@@ -29,39 +29,68 @@ public class Trie {
     }
 
     public void add(String word) {
-        Node cur = root;
-        Character c = null;
-        for (int i = 0; i < word.length(); i++) {
-            c = word.charAt(i);
-            if(!cur.next.containsKey(c)){
-                cur.next.put(c, new Node(false, new HashMap<>()));
-            }
-            cur = cur.next.get(c);
-        }
-
-        if(!cur.isWord){
-            cur.setWord(true);
-            size ++;
-        }
-
-        add(root,word);
+        add(root, word, 0);
     }
 
-    private void add(Node node, String word){
-        Character c = word.charAt(0);
-        if(!node.next.containsKey(c)){
-            node.next.put(c,new Node(false, new HashMap<>()));
+    private void add(Node node, String word, int index) {
+        if (index == word.length()) {
+            return;
         }
-        if(word.length() == 1){
-            if(!node.next.get(c).isWord()) {
-               node.getNext().get(c).setWord(true);
-               size ++;
-            }
+        Character c = word.charAt(index);
+
+        if (node.getNext().get(c) == null) {
+            node.getNext().put(c, new Node(false, new HashMap<>()));
         }
-        else{
-            add(node.next.get(c),word.substring(1));
+        if (index == word.length() - 1 && !node.getNext().get(c).isWord()) {
+            node.getNext().get(c).setWord(true);
+            size++;
+        }
+        add(node.getNext().get(c), word, index + 1);
+    }
+
+
+    public boolean contains(String word) {
+        return contains(root, word, 0);
+    }
+
+    private boolean contains(Node node, String word, int index) {
+        Character c = word.charAt(index);
+
+        if (!node.getNext().containsKey(c)) {
+            return false;
         }
 
+        if (index == word.length() - 1) {
+            return node.getNext().get(c).isWord();
+        }
+
+        return contains(node.getNext().get(c), word, index + 1);
+    }
+
+
+    public boolean match(String pattern) {
+        return match(root, pattern, 0);
+    }
+
+    private boolean match(Node node, String pattern, int index) {
+        if (index == pattern.length()) {
+            return true;
+        }
+
+        Character c = pattern.charAt(index);
+        if (c.equals('.')) {
+            for (Node child : node.getNext().values()) {
+                if (match(child, pattern, index + 1)) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            if (node.getNext().get(c) == null) {
+                return false;
+            }
+            return match(node.getNext().get(c), pattern, index + 1);
+        }
     }
 
     private class Node {

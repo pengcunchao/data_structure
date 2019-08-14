@@ -1,6 +1,7 @@
 package com.share;
 
 import com.share.api.impl.TreeSegmentTree;
+import com.share.api.impl.Trie;
 
 /**
  * 数组
@@ -12,16 +13,20 @@ import com.share.api.impl.TreeSegmentTree;
  * 集合
  * 映射
  * 线段树
+ * Trie字典树
+ * 并查集forest
  * **/
 public class Main {
 
     public static void main(String[] args) {
-        TreeSegmentTree<Integer> segmentTree = new TreeSegmentTree<>(new Integer[]{1, 5, 1, -9}, (a, b) -> a + b);
-        System.out.println(segmentTree.query(0,3));
-        System.out.println(segmentTree.query(1,3));
-        segmentTree.update(0,10);
-        System.out.println(segmentTree.query(0,3));
-        System.out.println(segmentTree.query(0,2));
+        Trie trie = new Trie();
+        trie.add("apple");
+        trie.add("pig");
+
+        System.out.println(trie.contains("apple"));
+        System.out.println(trie.match("a..le"));
+        System.out.println(trie.contains("peach"));
+        System.out.println(trie.match("b.."));
 
     }
 }
