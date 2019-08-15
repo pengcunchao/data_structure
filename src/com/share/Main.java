@@ -16,6 +16,7 @@ import java.util.Random;
  * 线段树
  * Trie字典树
  * 并查集forest
+ * 哈希表
  * **/
 public class Main {
 
