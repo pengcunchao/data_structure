@@ -1,6 +1,6 @@
 package com.share;
 
-import com.share.api.impl.RankUnionFind;
+import com.share.datastructure.api.impl.RankUnionFind;
 
 import java.util.Random;
 
