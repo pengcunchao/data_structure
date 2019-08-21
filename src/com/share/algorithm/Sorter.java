@@ -1,5 +1,7 @@
 package com.share.algorithm;
 
+import java.util.Random;
+
 public class Sorter<T extends Comparable<T>> {
     public static <T extends Comparable<T>> void selectionSort(T[] arr) {
         int len = arr.length;
@@ -77,6 +79,37 @@ public class Sorter<T extends Comparable<T>> {
         }
     }
 
+    public static <T extends Comparable<T>> void quickSort(T[] arr) {
+        quickSort(arr, 0, arr.length);
+    }
+
+    private static <T extends Comparable<T>> void quickSort(T[] arr, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+
+        int index = start + new Random().nextInt(end) % (end - start);
+        swap(arr, start, index);
+        int lt = start, gt = end;
+
+        for (int i = start + 1; i < gt; ) {
+            if (arr[i].compareTo(arr[start]) == 0) {
+                i++;
+            } else if (arr[i].compareTo(arr[start]) > 0) {
+                swap(arr, i, gt - 1);
+                gt--;
+            } else {
+                swap(arr, lt + 1, i);
+                lt++;
+                i++;
+            }
+        }
+        swap(arr, start, lt);
+
+        quickSort(arr, start, lt);
+        quickSort(arr, gt, end);
+    }
+
     public static <T extends Comparable<T>> void swap(T[] arr, int i, int j) {
         T temp = arr[i];
         arr[i] = arr[j];
@@ -88,7 +121,8 @@ public class Sorter<T extends Comparable<T>> {
         //selectionSort(intArr);
         //insertionSort(intArr);
         //bubboSort(intArr);
-        mergeSort(intArr);
+        quickSort(intArr);
+        //mergeSort(intArr);
         for (int i = 0; i < intArr.length; i++) {
             System.out.println(intArr[i]);
         }
