@@ -4,6 +4,7 @@ import com.share.datastructure.api.Array;
 import com.share.datastructure.api.Graph;
 import com.share.datastructure.api.impl.DenseGraph;
 import com.share.datastructure.api.impl.DynamicArray;
+import com.share.datastructure.api.impl.SparseGraph;
 
 /**
  * 数组
@@ -30,12 +31,14 @@ public class Main {
             nodes.add(i, i);
         }
 
-        Graph<Integer> graph = new DenseGraph<>(nodes);
+        //Graph<Integer> graph = new DenseGraph<>(nodes);
+        Graph<Integer> graph = new SparseGraph<>(nodes);
         graph.addEdge(0, 1, 100);
         graph.addEdge(8, 9, 100);
 
         System.out.println(graph.getWeight(0, 1));
         System.out.println(graph.getWeight(8, 9));
+        System.out.println(graph.getWeight(8, 7));
 
         long end = System.currentTimeMillis();
         System.out.println((end - start) / 1000);

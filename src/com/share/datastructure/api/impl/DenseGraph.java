@@ -16,9 +16,9 @@ public class DenseGraph<T> implements Graph<T> {
         for (int i = 0; i < size; i++) {
             Array<Integer> column = new DynamicArray<>(size);
             for (int j = 0; j < size; j++) {
-                column.set(j, Integer.MAX_VALUE);
+                column.add(j, Integer.MAX_VALUE);
             }
-            matrix.set(i, column);
+            matrix.add(i, column);
         }
     }
 

@@ -17,7 +17,7 @@ public class SparseGraph<T> implements Graph<T> {
         this.edges = 0;
         edgeList = new DynamicArray<>(nodes.getSize());
         for (int i = 0; i < nodes.getSize(); i++) {
-            edgeList.set(i, new LinkedList<>());
+            edgeList.add(i, new LinkedList<>());
         }
     }
 
