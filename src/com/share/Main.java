@@ -1,8 +1,9 @@
 package com.share;
 
-import com.share.datastructure.api.impl.RankUnionFind;
-
-import java.util.Random;
+import com.share.datastructure.api.Array;
+import com.share.datastructure.api.Graph;
+import com.share.datastructure.api.impl.DenseGraph;
+import com.share.datastructure.api.impl.DynamicArray;
 
 /**
  * 数组
@@ -17,23 +18,24 @@ import java.util.Random;
  * Trie字典树
  * 并查集forest
  * 哈希表
+ * 图
  * **/
 public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        int n = 100000000;
-        RankUnionFind rankUnionFind = new RankUnionFind(n);
-        Random random = new Random();
-        for (int i = 0; i < n -1; i++) {
-            rankUnionFind.union(i, i+1);
+        int capacity = 10;
+        Array<Integer> nodes = new DynamicArray<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            nodes.add(i, i);
         }
-        System.out.println(rankUnionFind.isConnected(0, 1));
-        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
-        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
-        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
-        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
-        System.out.println(rankUnionFind.isConnected(random.nextInt(n), random.nextInt(n)));
+
+        Graph<Integer> graph = new DenseGraph<>(nodes);
+        graph.addEdge(0, 1, 100);
+        graph.addEdge(8, 9, 100);
+
+        System.out.println(graph.getWeight(0, 1));
+        System.out.println(graph.getWeight(8, 9));
 
         long end = System.currentTimeMillis();
         System.out.println((end - start) / 1000);
