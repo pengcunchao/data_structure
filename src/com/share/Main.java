@@ -31,14 +31,17 @@ public class Main {
             nodes.add(i, i);
         }
 
-        //Graph<Integer> graph = new DenseGraph<>(nodes);
-        Graph<Integer> graph = new SparseGraph<>(nodes);
+        Graph<Integer> graph = new DenseGraph<>(nodes);
+        //Graph<Integer> graph = new SparseGraph<>(nodes);
         graph.addEdge(0, 1, 100);
         graph.addEdge(8, 9, 100);
 
         System.out.println(graph.getWeight(0, 1));
         System.out.println(graph.getWeight(8, 9));
         System.out.println(graph.getWeight(8, 7));
+
+        graph.DFS();
+        graph.BFS();
 
         long end = System.currentTimeMillis();
         System.out.println((end - start) / 1000);

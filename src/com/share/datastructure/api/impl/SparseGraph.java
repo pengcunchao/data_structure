@@ -39,6 +39,17 @@ public class SparseGraph<T> implements Graph<T> {
         return edge == null ? Integer.MAX_VALUE : edge.weight;
     }
 
+    @Override
+    public void DFS() {
+
+    }
+
+    @Override
+    public void BFS() {
+
+    }
+
+
     private Edge find(int n, int m) {
         List<Edge> edges = edgeList.get(n);
         for (Edge edge : edges) {
